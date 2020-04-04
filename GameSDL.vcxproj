@@ -71,7 +71,7 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>C:\Users\Hamilton\Desktop\GameSDL\lib\SDL2_ttf\include;C:\Users\Hamilton\Desktop\GameSDL\lib\SDL2_mixer\include;C:\Users\Hamilton\Desktop\GameSDL\lib\SDL2_Image\include;C:\Users\Hamilton\Desktop\GameSDL\lib\SDL2\include;$(IncludePath)</IncludePath>
+    <IncludePath>C:\Users\Hamilton\Desktop\GameSDL\lib\glm;C:\Users\Hamilton\Desktop\GameSDL\lib\SDL2_ttf\include;C:\Users\Hamilton\Desktop\GameSDL\lib\SDL2_mixer\include;C:\Users\Hamilton\Desktop\GameSDL\lib\SDL2_Image\include;C:\Users\Hamilton\Desktop\GameSDL\lib\SDL2\include;$(IncludePath)</IncludePath>
     <LibraryPath>C:\Users\Hamilton\Desktop\GameSDL\lib\SDL2_ttf\lib;C:\Users\Hamilton\Desktop\GameSDL\lib\SDL2_mixer\lib;C:\Users\Hamilton\Desktop\GameSDL\lib\SDL2_Image\lib;C:\Users\Hamilton\Desktop\GameSDL\lib\SDL2\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -142,12 +142,19 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Game.cpp" />
+    <ClCompile Include="src\components\TransformComponent.cpp" />
+    <ClCompile Include="src\entities\Entity.cpp" />
+    <ClCompile Include="src\entities\EntityManager.cpp" />
+    <ClCompile Include="src\Game.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="constants.h" />
-    <ClInclude Include="game.h" />
+    <ClInclude Include="src\components\Component.h" />
+    <ClInclude Include="src\components\TransformComponent.h" />
+    <ClInclude Include="src\constants.h" />
+    <ClInclude Include="src\entities\Entity.h" />
+    <ClInclude Include="src\entities\EntityManager.h" />
+    <ClInclude Include="src\game.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
