@@ -1,20 +1,16 @@
 #ifndef GAME_H
 #define GAME_H
 
-#include <iostream>;
-
 #include "../lib/SDL2/include/SDL.h"
 #include "../lib/SDL2_Image/include/SDL_image.h"
 #include "../lib/SDL2_mixer/include/SDL_mixer.h"
 #include "../lib/SDL2_ttf/include/SDL_ttf.h"
-#include "../lib/glm/glm.hpp"
 
-#include "constants.h"
-#include "entities/EntityManager.h"
+#include "entities/Entity.h"
 #include "components/Component.h"
+#include "entities/EntityManager.h"
 
-class EntityManager;
-class Component;
+class AssetManager;
 
 class Game {
 
@@ -24,13 +20,14 @@ private:
 
 public:
 	static SDL_Renderer* renderer;
-	int ticksLastFrame;
+	static AssetManager* assetManager;
+	int ticksLastFrame = 0;
 
 	Game();
 	~Game();
-	void loadLevel(int levelNumber);
 	bool getIsRunning() const;
 	bool initialize(const char* title, int width, int height);
+	void loadLevel(int levelNumber);
 	void processInput();
 	void update();
 	void render();

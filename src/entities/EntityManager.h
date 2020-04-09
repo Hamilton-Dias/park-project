@@ -1,8 +1,7 @@
 #ifndef ENTITYMANAGER_H
 #define ENTITYMANAGER_H
 
-#include <vector>;
-#include <string>;
+#include <vector>
 #include "Entity.h"
 #include "../components/Component.h"
 
@@ -15,7 +14,7 @@ public:
 	void clearData();
 	void update(float deltaTime);
 	void render();
-	bool HasNoEntities();
+	bool hasNoEntities();
 	Entity& addEntity(std::string name);
 	std::vector<Entity*> getEntityList() const;
 	unsigned int getEntityCount();

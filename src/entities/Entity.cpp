@@ -1,8 +1,9 @@
 #include "Entity.h"
 
-Entity::Entity(EntityManager& manager, std::string name) {
+Entity::Entity(EntityManager& manager, std::string name): manager(manager), name(name) {
 
-	this->name = name;
+	//this->manager = manager;
+	//this->name = name;
 	this->isActive = true;
 }
 

@@ -1,20 +1,24 @@
+#include <iostream>
+
+#include "constants.h"
 #include "game.h"
+#include "graphics/AssetManager.h"
+#include "components/TransformComponent.h"
+#include "components/SpriteComponent.h"
+#include "../lib/glm/glm.hpp"
 
 EntityManager manager;
+AssetManager* Game::assetManager = new AssetManager(&manager);
 SDL_Renderer* Game::renderer;
 
 Game::Game() {
 	this->isRunning = false;
 	this->window = NULL;
 	this->renderer = NULL;
-	this->ticksLastFrame = SDL_GetTicks();
+	//this->ticksLastFrame = SDL_GetTicks();
 };
 
 Game::~Game() {};
-
-void Game::loadLevel(int levelNumber) {
-	
-};
 
 bool Game::getIsRunning() const {
 	return this->isRunning;
@@ -39,10 +43,22 @@ bool Game::initialize(const char* title, int width, int height) {
 		return false;
 	}
 
+	this->loadLevel(0);
+
 	this->isRunning = true;
 
 	return true;
 };
+
+void Game::loadLevel(int levelNumber) {
+
+	std::string textureFilePath = "assets/images/tank-big-right.png";
+	assetManager->addTexture("tank-image", textureFilePath.c_str());
+
+	Entity& newEntity(manager.addEntity("tank"));
+	newEntity.addComponent<TransformComponent>(0, 0, 20, 20, 32, 32, 1);
+	newEntity.addComponent<SpriteComponent>("tank-image");
+}
 
 void Game::processInput() {
 	SDL_Event event;
@@ -75,17 +91,18 @@ void Game::update() {
 	deltaTime = (deltaTime > 0.05f) ? 0.05f : deltaTime;
 	this->ticksLastFrame = SDL_GetTicks();
 
-	//do the update
-	// value += value * deltatime ----> to move smoothly
+	manager.update(deltaTime);
 };
 
 void Game::render() {
-	SDL_SetRenderDrawColor(this->renderer, 0, 255, 0, 255);
+	SDL_SetRenderDrawColor(this->renderer, 21, 21, 21, 255);
 	SDL_RenderClear(this->renderer);
 	
-	SDL_Rect projectile{10, 10,	10,	10};
-	SDL_SetRenderDrawColor(this->renderer, 255, 255, 255, 255);
-	SDL_RenderFillRect(this->renderer, &projectile);
+	if (manager.hasNoEntities()) {
+		return;
+	}
+
+	manager.render();
 
 	SDL_RenderPresent(this->renderer);
 };

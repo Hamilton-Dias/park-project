@@ -7,7 +7,7 @@ void EntityManager::clearData() {
 	}
 }
 
-bool EntityManager::HasNoEntities() {
+bool EntityManager::hasNoEntities() {
 
 	return entities.size() == 0;
 }
