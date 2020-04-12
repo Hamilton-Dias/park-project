@@ -147,17 +147,20 @@
     <ClCompile Include="src\entities\EntityManager.cpp" />
     <ClCompile Include="src\Game.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="src\graphics\Animation.cpp" />
     <ClCompile Include="src\graphics\AssetManager.cpp" />
     <ClCompile Include="src\graphics\TextureManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\components\Component.h" />
+    <ClInclude Include="src\components\KeyboardControllerComponent.h" />
     <ClInclude Include="src\components\SpriteComponent.h" />
     <ClInclude Include="src\components\TransformComponent.h" />
     <ClInclude Include="src\constants.h" />
     <ClInclude Include="src\entities\Entity.h" />
     <ClInclude Include="src\entities\EntityManager.h" />
     <ClInclude Include="src\game.h" />
+    <ClInclude Include="src\graphics\Animation.h" />
     <ClInclude Include="src\graphics\AssetManager.h" />
     <ClInclude Include="src\graphics\TextureManager.h" />
   </ItemGroup>
