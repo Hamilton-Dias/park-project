@@ -1,0 +1,12 @@
+﻿  Map.cpp
+C:\Users\Hamil\Desktop\park-project\src\components\TileComponent.h(29,26): warning C4244: '=': conversion from 'int' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+C:\Users\Hamil\Desktop\park-project\src\components\TileComponent.h(30,26): warning C4244: '=': conversion from 'int' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+  GameSDL.vcxproj -> C:\Users\Hamil\Desktop\park-project\x64\Debug\GameSDL.exe

@@ -23,6 +23,7 @@ public:
 	static AssetManager* assetManager;
 	static SDL_Event event;
 	int ticksLastFrame = 0;
+	static SDL_Rect camera;
 
 	Game();
 	~Game();
@@ -33,6 +34,7 @@ public:
 	void update();
 	void render();
 	void destroy();
+	//void HandleCameraMovement();
 
 };
 

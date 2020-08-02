@@ -3,6 +3,7 @@
 #include "constants.h"
 #include "game.h"
 #include "graphics/AssetManager.h"
+#include "Map.h"
 #include "components/TransformComponent.h"
 #include "components/SpriteComponent.h"
 #include "components/KeyboardControllerComponent.h"
@@ -12,6 +13,8 @@ EntityManager manager;
 AssetManager* Game::assetManager = new AssetManager(&manager);
 SDL_Renderer* Game::renderer;
 SDL_Event Game::event;
+SDL_Rect Game::camera = { 0, 0, WINDOW_WIDTH, WINDOW_HEIGHT };
+Map* map;
 
 Game::Game() {
 	this->isRunning = false;
@@ -57,6 +60,10 @@ void Game::loadLevel(int levelNumber) {
 	assetManager->addTexture("tank-image", std::string("assets/images/tank-big-right.png").c_str());
 	assetManager->addTexture("chopper-image", std::string("assets/images/chopper-spritesheet.png").c_str());
 	assetManager->addTexture("radar-image", std::string("assets/images/radar.png").c_str());
+	assetManager->addTexture("jungle-tiletexture", std::string("assets/tilemaps/jungle.png").c_str());
+
+	map = new Map("jungle-tiletexture", 1, 32);
+	map->LoadMap("assets/tilemaps/jungle.map", 25, 20);
 
 	Entity& chopperEntity(manager.addEntity("chopper"));
 	chopperEntity.addComponent<TransformComponent>(240, 100, 0, 0, 32, 32, 1);
@@ -104,7 +111,21 @@ void Game::update() {
 	this->ticksLastFrame = SDL_GetTicks();
 
 	manager.update(deltaTime);
+
+	//HandleCameraMovement();
 };
+
+/*void Game::HandleCameraMovement() {
+	TransformComponent* mainPlayerTransform = player.GetComponent<TransformComponent>();
+
+	camera.x = mainPlayerTransform->position.x - (WINDOW_WIDTH / 2);
+	camera.y = mainPlayerTransform->position.y - (WINDOW_HEIGHT / 2);
+
+	camera.x = camera.x < 0 ? 0 : camera.x;
+	camera.y = camera.y < 0 ? 0 : camera.y;
+	camera.x = camera.x > camera.w ? camera.w : camera.x;
+	camera.y = camera.y > camera.h ? camera.h : camera.y;
+}*/
 
 void Game::render() {
 	SDL_SetRenderDrawColor(this->renderer, 21, 21, 21, 255);
