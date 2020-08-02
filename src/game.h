@@ -35,7 +35,7 @@ public:
 	void render();
 	void destroy();
 	void HandleCameraMovement();
-
+	void checkCollisions();
 };
 
 #endif // !GAME_H

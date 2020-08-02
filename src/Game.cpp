@@ -6,6 +6,7 @@
 #include "Map.h"
 #include "components/TransformComponent.h"
 #include "components/SpriteComponent.h"
+#include "components/ColliderComponent.h"
 #include "components/KeyboardControllerComponent.h"
 #include "../lib/glm/glm.hpp"
 
@@ -67,13 +68,15 @@ void Game::loadLevel(int levelNumber)
 	map = new Map("jungle-tiletexture", 2, 32);
 	map->LoadMap("assets/tilemaps/jungle.map", 25, 20);
 
-	player.addComponent<TransformComponent>(240, 100, 0, 0, 32, 32, 1);
+	player.addComponent<TransformComponent>(240, 106, 0, 0, 32, 32, 1);
 	player.addComponent<SpriteComponent>("chopper-image", 2, 90, true, false);
 	player.addComponent<KeyboardControllerComponent>("up", "right", "down", "left", "space");
+	player.addComponent<ColliderComponent>("player", 240, 106, 32, 32);
 
 	Entity& tankEntity(manager.addEntity("tank", ENEMY_LAYER));
-	tankEntity.addComponent<TransformComponent>(0, 0, 20, 20, 32, 32, 1);
+	tankEntity.addComponent<TransformComponent>(150, 495, 5, 0, 32, 32, 1);
 	tankEntity.addComponent<SpriteComponent>("tank-image");
+	tankEntity.addComponent<ColliderComponent>("enemy", 150, 495, 32, 32);
 
 	Entity& radarEntity(manager.addEntity("radar", UI_LAYER));
 	radarEntity.addComponent<TransformComponent>(720, 15, 0, 0, 64, 64, 1);
@@ -114,6 +117,8 @@ void Game::update() {
 	manager.update(deltaTime);
 
 	HandleCameraMovement();
+
+	checkCollisions();
 };
 
 void Game::HandleCameraMovement() {
@@ -126,6 +131,16 @@ void Game::HandleCameraMovement() {
 	camera.y = camera.y < 0 ? 0 : camera.y;
 	camera.x = camera.x > camera.w ? camera.w : camera.x;
 	camera.y = camera.y > camera.h ? camera.h : camera.y;
+}
+
+void Game::checkCollisions()
+{
+	std::string collisionTagType = manager.checkEntityCollisions(player);
+
+	if (collisionTagType.compare("enemy") == 0)
+	{
+		//TODO: collision
+	}
 }
 
 void Game::render() {

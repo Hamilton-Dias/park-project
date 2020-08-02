@@ -19,7 +19,7 @@ public:
 	std::vector<Entity*> getEntityList() const;
 	std::vector<Entity*> getEntitiesByLayer(LayerType layer) const;
 	unsigned int getEntityCount();
-
+	std::string checkEntityCollisions(Entity& entity) const;
 };
 
 #endif // !ENTITYMANAGER_H

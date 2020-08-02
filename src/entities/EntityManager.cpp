@@ -1,4 +1,6 @@
 #include "EntityManager.h"
+#include "../Collision.h"
+#include "../components/ColliderComponent.h"
 
 void EntityManager::clearData() {
 
@@ -62,4 +64,25 @@ std::vector<Entity*> EntityManager::getEntityList() const {
 unsigned int EntityManager::getEntityCount() {
 
 	return entities.size();
+}
+
+std::string EntityManager::checkEntityCollisions(Entity& myEntity) const
+{
+	ColliderComponent* myCollider = myEntity.getComponent<ColliderComponent>();
+
+	for (auto& entity : entities)
+	{
+		if (entity->name.compare(myEntity.name) != 0 && entity->name.compare("Tile") != 0)
+		{
+			if (entity->hasComponent<ColliderComponent>())
+			{
+				ColliderComponent* otherCollider = entity->getComponent<ColliderComponent>();
+
+				if (Collision::checkRectangleCollision(myCollider->collider, otherCollider->collider))
+					return otherCollider->colliderTag;
+			}
+		}
+	}
+
+	return std::string();
 }
