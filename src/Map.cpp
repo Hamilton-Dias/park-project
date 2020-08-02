@@ -30,7 +30,8 @@ void Map::LoadMap(std::string filePath, int mapSizeX, int mapSizeY) {
     mapFile.close();
 }
 
-void Map::AddTile(int sourceRectX, int sourceRectY, int x, int y) {
-    Entity& newTile(manager.addEntity("Tile"));
+void Map::AddTile(int sourceRectX, int sourceRectY, int x, int y)
+{
+    Entity& newTile(manager.addEntity("Tile", TILEMAP_LAYER));
     newTile.addComponent<TileComponent>(sourceRectX, sourceRectY, x, y, tileSize, scale, textureId);
 }

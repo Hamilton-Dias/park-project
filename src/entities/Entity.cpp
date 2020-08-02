@@ -1,6 +1,6 @@
 #include "Entity.h"
 
-Entity::Entity(EntityManager& manager, std::string name): manager(manager), name(name) {
+Entity::Entity(EntityManager& manager, std::string name, LayerType layer): manager(manager), name(name), layer(layer) {
 
 	//this->manager = manager;
 	//this->name = name;

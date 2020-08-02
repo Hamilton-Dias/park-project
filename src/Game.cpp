@@ -55,26 +55,26 @@ bool Game::initialize(const char* title, int width, int height) {
 	return true;
 };
 
-void Game::loadLevel(int levelNumber) {
-
+void Game::loadLevel(int levelNumber)
+{
 	assetManager->addTexture("tank-image", std::string("assets/images/tank-big-right.png").c_str());
 	assetManager->addTexture("chopper-image", std::string("assets/images/chopper-spritesheet.png").c_str());
 	assetManager->addTexture("radar-image", std::string("assets/images/radar.png").c_str());
 	assetManager->addTexture("jungle-tiletexture", std::string("assets/tilemaps/jungle.png").c_str());
 
-	map = new Map("jungle-tiletexture", 1, 32);
+	map = new Map("jungle-tiletexture", 2, 32);
 	map->LoadMap("assets/tilemaps/jungle.map", 25, 20);
 
-	Entity& chopperEntity(manager.addEntity("chopper"));
+	Entity& chopperEntity(manager.addEntity("chopper", PLAYER_LAYER));
 	chopperEntity.addComponent<TransformComponent>(240, 100, 0, 0, 32, 32, 1);
 	chopperEntity.addComponent<SpriteComponent>("chopper-image", 2, 90, true, false);
 	chopperEntity.addComponent<KeyboardControllerComponent>("up", "right", "down", "left", "space");
 
-	Entity& tankEntity(manager.addEntity("tank"));
+	Entity& tankEntity(manager.addEntity("tank", ENEMY_LAYER));
 	tankEntity.addComponent<TransformComponent>(0, 0, 20, 20, 32, 32, 1);
 	tankEntity.addComponent<SpriteComponent>("tank-image");
 
-	Entity& radarEntity(manager.addEntity("radar"));
+	Entity& radarEntity(manager.addEntity("radar", UI_LAYER));
 	radarEntity.addComponent<TransformComponent>(720, 15, 0, 0, 64, 64, 1);
 	radarEntity.addComponent<SpriteComponent>("radar-image", 8, 150, false, true);
 }

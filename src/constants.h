@@ -17,4 +17,6 @@ enum LayerType {
     UI_LAYER = 5
 };
 
+const unsigned int NUM_LAYERS = 6;
+
 #endif // !CONSTANTS_H

@@ -4,6 +4,7 @@
 #include <vector>
 #include <string>
 #include <map>
+#include "../constants.h"
 #include <typeinfo>
 #include "EntityManager.h"
 #include "../components/Component.h"
@@ -21,8 +22,9 @@ private:
 
 public:
 	std::string name;
+    LayerType layer;
 
-	Entity(EntityManager& manager, std::string name);
+	Entity(EntityManager& manager, std::string name, LayerType layer);
 	void update(float deltaTime);
 	void render();
 	void destroy();
