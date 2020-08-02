@@ -34,7 +34,7 @@ public:
 	void update();
 	void render();
 	void destroy();
-	//void HandleCameraMovement();
+	void HandleCameraMovement();
 
 };
 

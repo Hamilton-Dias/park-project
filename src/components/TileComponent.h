@@ -34,10 +34,10 @@ class TileComponent: public Component {
             SDL_DestroyTexture(texture);
         }
 
-        /*void update(float deltaTime) override {
+        void update(float deltaTime) override {
             destinationRectangle.x = position.x - Game::camera.x;
             destinationRectangle.y = position.y - Game::camera.y;
-        }*/
+        }
 
         void render() override {
             TextureManager::draw(texture, sourceRectangle, destinationRectangle, SDL_FLIP_NONE);

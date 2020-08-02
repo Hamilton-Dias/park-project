@@ -55,6 +55,8 @@ bool Game::initialize(const char* title, int width, int height) {
 	return true;
 };
 
+Entity& player(manager.addEntity("chopper", PLAYER_LAYER));
+
 void Game::loadLevel(int levelNumber)
 {
 	assetManager->addTexture("tank-image", std::string("assets/images/tank-big-right.png").c_str());
@@ -65,10 +67,9 @@ void Game::loadLevel(int levelNumber)
 	map = new Map("jungle-tiletexture", 2, 32);
 	map->LoadMap("assets/tilemaps/jungle.map", 25, 20);
 
-	Entity& chopperEntity(manager.addEntity("chopper", PLAYER_LAYER));
-	chopperEntity.addComponent<TransformComponent>(240, 100, 0, 0, 32, 32, 1);
-	chopperEntity.addComponent<SpriteComponent>("chopper-image", 2, 90, true, false);
-	chopperEntity.addComponent<KeyboardControllerComponent>("up", "right", "down", "left", "space");
+	player.addComponent<TransformComponent>(240, 100, 0, 0, 32, 32, 1);
+	player.addComponent<SpriteComponent>("chopper-image", 2, 90, true, false);
+	player.addComponent<KeyboardControllerComponent>("up", "right", "down", "left", "space");
 
 	Entity& tankEntity(manager.addEntity("tank", ENEMY_LAYER));
 	tankEntity.addComponent<TransformComponent>(0, 0, 20, 20, 32, 32, 1);
@@ -112,11 +113,11 @@ void Game::update() {
 
 	manager.update(deltaTime);
 
-	//HandleCameraMovement();
+	HandleCameraMovement();
 };
 
-/*void Game::HandleCameraMovement() {
-	TransformComponent* mainPlayerTransform = player.GetComponent<TransformComponent>();
+void Game::HandleCameraMovement() {
+	TransformComponent* mainPlayerTransform = player.getComponent<TransformComponent>();
 
 	camera.x = mainPlayerTransform->position.x - (WINDOW_WIDTH / 2);
 	camera.y = mainPlayerTransform->position.y - (WINDOW_HEIGHT / 2);
@@ -125,7 +126,7 @@ void Game::update() {
 	camera.y = camera.y < 0 ? 0 : camera.y;
 	camera.x = camera.x > camera.w ? camera.w : camera.x;
 	camera.y = camera.y > camera.h ? camera.h : camera.y;
-}*/
+}
 
 void Game::render() {
 	SDL_SetRenderDrawColor(this->renderer, 21, 21, 21, 255);
